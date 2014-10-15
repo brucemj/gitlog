@@ -60,4 +60,30 @@ done
 #git log --pretty=format:'%d' b3d3cf0 -1
 # --abbrev-commit
 #
+exit 0
+cd /home/mojun/gitst/test/log
+git co -b test
+git reset cb65e89 --hard
+../ciAuto.sh t=={x,1,2,3}
+git co test~
+../ciAuto.sh tii{q,a,b,c}
+tempA="$(git log --pretty=format:'%h' -1)"
+git co test
+git merge $tempA -m "test111"
+../ciAuto.sh t=={y,4,5}
+git co $tempA~ ; ../ciAuto.sh tii{w,4,5}
+tempB="$(git log --pretty=format:'%h' -1)"
+git co test
+git merge $tempB -m "test222"
+../ciAuto.sh t=={z,xx}
+
+
+
+
+
+
+
+
+
+
 

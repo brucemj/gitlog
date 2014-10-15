@@ -65,4 +65,72 @@
 		return $result;
 
 	}
+
+	
+	static $i=0;
+	function preNote($array, $ci){
+		
+		static $arrText= array();
+		 $leftText = '';
+		 $rightText = '';
+		static $allText = '';
+		$curCi = $ci; // example  root commit;
+		$kv = $array;
+		
+		if( $kv[$curCi]['phl'] != $kv[$curCi]['phr']){
+			while($kv[$curCi]['phl']){
+				if( ! substr_count($allText, $kv[$curCi]['phl'])){
+					$allText .= $kv[$curCi]['phl']; $allText .= ',';
+					$leftText .= $kv[$curCi]['phl']; $leftText .= ',';
+					$curCi = $kv[$curCi]['phl'];
+				}
+			}
+			$arrText[] = array( 'leftText' =>$leftText );
+
+			$curCi = $ci;
+			while( $kv[$curCi]['phr'] != ''){
+
+				if( ! substr_count($allText, $kv[$curCi]['phr'])){
+					$rightText .= $kv[$curCi]['phr']; $rightText .= ',';				
+					$curCi = $kv[$curCi]['phr'];
+					if( $kv[$curCi]['phl'] != $kv[$curCi]['phr']){
+						
+						preNote($kv, $curCi);
+					}
+				}else{
+					break;
+				}
+			}
+			$arrText[] = array( 'rightText' =>$rightText );
+		}else{
+
+		}
+
+		//echo 'leftText is ' . $leftText . '<br />';
+		//echo 'rightText is ' . $rightText . '<br />';
+		p($arrText);
+	}
+
+	function pre2Note($array){
+		$curCi = "bac84b1"; // example  root commit;
+		$kv = $array;
+		while($kv[$curCi]['phl']){
+			$leftText .= $kv[$curCi]['phl']; $leftText .= ',';
+			$curCi = $kv[$curCi]['phl'];
+		}
+		$curCi = "bac84b1";
+		if( $kv[$curCi]['phl'] != $kv[$curCi]['phr']){
+			while( $kv[$curCi]['phr'] != ''){
+				if( ! substr_count($leftText, $kv[$curCi]['phr'])){
+					$rightText .= $kv[$curCi]['phr']; $rightText .= ',';				
+					$curCi = $kv[$curCi]['phr'];
+				}else{
+					break;
+				}
+			}
+		}
+		echo 'leftText is ' . $leftText . '<br />';
+		echo 'rightText is ' . $rightText . '<br />';
+	}
+
 ?>

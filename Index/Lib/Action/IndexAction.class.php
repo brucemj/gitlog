@@ -8,12 +8,13 @@ class IndexAction extends Action {
 		
 		$kv = array();  // create new key-value array using the data from databases;
 		$result = array(); // sort commits by HEAD -> parent;
-		$rootCi = "4f1c35c"; // example  root commit;
+		$rootCi = "bac84b1"; // example  root commit;
 		foreach ($ci as $v){
 			$kv[ $v[ch] ] = $v;
 		}
 		
-		$res = gitlg($kv);
+		//$res = gitlg($kv);
+		$res = preNote($kv, "817020c");
 		
 		
 		p($res);
