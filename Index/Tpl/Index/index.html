@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN""
+"http://www.w3.org/TR/html4/loose.dtd">
+<HEAD>
+    <script type="text/javascript" charset="utf-8" src="__PUBLIC__/Js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="__PUBLIC__/Js/fk.js"></script>
+	<?php $blk=16; $blkh=10; $width=12; $height=40; ?>
+	<?php
+	//git lg   116  /home/mojun/gitst/sys
+		$len = count($result);
+		echo '<script language="javascript" type="text/javascript"> var git = new Array();var subject = new Array();';
+		for($i=0;$i<$len;$i++){ 
+			echo 'git[' . "$i" . ']=' . '"' . $result[$i]["ch"] . '";';
+			echo 'subject[' . "$i" . ']=' . '"' . $result[$i]["subject"] . '";';
+		}
+		echo '</script>';
+		//  <script type="text/javascript" charset="utf-8" src="__PUBLIC__/Js/shap.js"></script>
+		//	<script type="text/javascript" charset="utf-8" src="__PUBLIC__/Js/eventK.js"></script>
+	?>
+	<script type="text/javascript" charset="utf-8" >
+		var len = <?php echo $len ;?>;
+		var width = <?php echo $width ;?>;
+	</script>
+	
+	<style type="text/css">
+	tr,td{text-align:center; background-color:#A7C942; width: <?php echo $blk."px";?> ; height: <?php echo $blkh."px";?>; margin: 0px; padding: 0px; border: 0px }
+		table{margin: 0px; padding:0px; border: 0px; border-collapse:collapse; width:100% }
+	</style>
+</HEAD>
+
+<html>
+<body onkeydown="keyDown(event)">
+    
+    <table>
+        <?php 
+        for($i=0; $i<$height; $i++){
+            echo '<tr class="row'. $i .'">';
+            for($j=0; $j<$width; $j++){
+                echo '<td class="data'. $i."-".$j .'" lock="0" name="blk">';
+                echo '';
+                echo '</td>';
+            }
+            echo '</tr>';
+        }
+        ?>
+    </table>
+</body>
+</html>
